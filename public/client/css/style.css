@@ -1,0 +1,4 @@
+a {
+    color: inherit !important; /* Varsayılan metin rengini kullan */
+    text-decoration: none !important; /* Alt çizgiyi kaldır */
+}
