@@ -23,18 +23,20 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
+            'email' => ['string', 'email', 'max:255', 'unique:users'],
             'name' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
+            'phone' => ['string', 'max:255', 'unique:users'],
 
         ];
 
         if (config('app.app_login_method') == AppLoginMethod::EMAIL->value) {
-            $rules['email'] = ['required', 'string', 'email', 'max:255', 'unique:users'];
+            $rules['email'][] = 'required';
         }
 
         if (config('app.app_login_method') == AppLoginMethod::PHONE->value) {
-            $rules['phone'] = ['required', 'string', 'max:255', 'unique:users'];
+            $rules['phone'][] = 'required';
         }
         return $rules;
     }
